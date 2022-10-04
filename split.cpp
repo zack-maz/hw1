@@ -36,8 +36,13 @@ void split_helper(Node*& in, Node*& odds, Node*& evens)
 {
   if (in == NULL) 
   { 
+<<<<<<< HEAD
     if (evens != NULL) evens->next = NULL; 
     if (odds != NULL) odds->next = NULL;
+=======
+    evens->next = NULL; 
+    odds->next = NULL;
+>>>>>>> 49cbbe3138ee58e7516a3ef2fe1fd46f4a3a4b04
     return; 
   }
 
