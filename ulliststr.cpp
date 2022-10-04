@@ -1,3 +1,4 @@
+
 #include <cstddef>
 #include <stdexcept>
 #include <iostream>
@@ -71,6 +72,7 @@ void ULListStr::clear()
 
 void ULListStr::push_back(const std::string& val)
 {
+  size_++;
   if (tail_ == NULL)
   {
     tail_ = new Item();
@@ -78,7 +80,6 @@ void ULListStr::push_back(const std::string& val)
     tail_->first = 0;
     tail_->last = 0;
     head_ = tail_;
-    size_++;
   }
   else if (tail_->last == ARRSIZE)
   {
@@ -90,7 +91,6 @@ void ULListStr::push_back(const std::string& val)
     tail_->next = temp;
     temp->prev = tail_;
     tail_ = temp;
-    size_++;
   }
   else
   {
@@ -101,6 +101,7 @@ void ULListStr::push_back(const std::string& val)
 
 void ULListStr::push_front(const std::string& val)
 {
+  size_++;
   if (head_ == NULL)
   {
     head_ = new Item();
@@ -108,7 +109,6 @@ void ULListStr::push_front(const std::string& val)
     head_->first = 10;
     head_->last = 10;
     tail_ = head_;
-    size_++;
   }
   else if (head_->first == 0)
   {
@@ -120,7 +120,6 @@ void ULListStr::push_front(const std::string& val)
     temp->next = head_;
     head_->prev = temp;
     head_ = temp;
-    size_++;
   }
   else
   {
@@ -141,14 +140,14 @@ void ULListStr::pop_back()
   {
     return;
   }
-  else if (tail_->last == tail_->first + 1)
+  size_--;
+  if (tail_->last == tail_->first + 1)
   {
     Item* temp = tail_;
     tail_ = temp->prev;
     if (tail_ != NULL) tail_->next = NULL;
     else head_ = NULL;
 
-    size_--;
     delete temp;
   }
   else
@@ -163,6 +162,7 @@ void ULListStr::pop_front()
   {
     return;
   }
+  size_--;
   if (head_->last == head_->first + 1)
   {
     Item* temp = head_;
@@ -170,7 +170,6 @@ void ULListStr::pop_front()
     if (head_ != NULL) head_->prev = NULL;
     else tail_ = NULL;
 
-    size_--;
     delete temp;
   }
   else
